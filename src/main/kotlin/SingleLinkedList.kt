@@ -4,8 +4,8 @@ import java.util.NoSuchElementException
 
 class SingleLinkedList : CustomList {
     class Node {
-        var value: Int = 0;
-        var next: Node? = null;
+        var value: Int = 0
+        var next: Node? = null
     }
 
     var begin: Node? = null
