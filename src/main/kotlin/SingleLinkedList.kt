@@ -1,52 +1,114 @@
 package org.example
 
-class SingleLinkedList : CustomList {
+import java.util.NoSuchElementException
 
-    private val inner = mutableListOf<Int>()
+class SingleLinkedList : CustomList {
+    class Node {
+        var value: Int = 0;
+        var next: Node? = null;
+    }
+
+    var begin: Node? = null
 
     override val size: Int
-        get() = TODO("Implement this")
+    get() {
+        var cur = begin
+        var i = 0
+
+        while (cur != null) {
+            cur = cur.next
+            i++
+        }
+
+        return i
+    }
 
     override fun add(element: Int) {
-        TODO("Implement this")
+        if (begin == null) {
+            begin = Node().also { it.value = element }
+        } else {
+            var cur = begin
+            while (cur?.next != null) {
+                cur = cur.next
+            }
+            cur?.next = Node().also { it.value = element }
+        }
+    }
+
+    private fun getNode(index: Int): Node? {
+        if (index < 0 || begin == null) return null
+        var cur = begin
+        for (i in 0 until index) {
+            cur = cur?.next ?: return null
+        }
+        return cur
     }
 
     override operator fun set(index: Int, value: Int) {
-        TODO("Implement this")
+        getNode(index)?.value = value
     }
 
     override fun addFirst(element: Int) {
-        TODO("Implement this")
+        val oldBegin = begin
+        begin = Node().also {
+            it.value = element
+            it.next = oldBegin
+        }
     }
 
     override operator fun get(index: Int): Int {
-        TODO("Implement this")
+        return getNode(index)?.value ?: throw IndexOutOfBoundsException()
     }
 
     override fun indexOf(element: Int): Int {
-        TODO("Implement this")
+        var i = 0
+        for (v in this.iterator()) {
+            if (v == element) return i
+            i++
+        }
+        throw NoSuchElementException()
     }
 
     override fun remove(element: Int): Boolean {
-        TODO("Implement this")
+        try {
+            val idx = indexOf(element)
+
+            if (idx == 0) {
+                begin = begin?.next
+            } else {
+                var node = getNode(idx) ?: throw IndexOutOfBoundsException()
+                var previous = getNode(idx - 1) ?: throw IndexOutOfBoundsException()
+
+                previous.next = node.next
+            }
+
+            return true
+        } catch (NoSuchElementException) {
+            return false
+        }
     }
 
     override fun iterator(): Iterator<Int> {
         return object : Iterator<Int> {
+            var cur = begin
+
             override fun hasNext(): Boolean {
-                TODO("Implement this")
+                return begin != null
             }
 
             override fun next(): Int {
-                TODO("Implement this")
+                val value = cur?.value ?: throw NoSuchElementException()
+                cur = cur?.next
+
+                return value
             }
         }
     }
 
     companion object {
         fun singleLinkedListOf(vararg items: Int) =
-            items.fold(SingleLinkedList()) { list, item ->
-                list.also{ it.add(item) }
-            }
-    }
+        items.fold(SingleLinkedList()) { list, item ->
+            list.also{ it.add(item) }
+        }
+  }
 }
