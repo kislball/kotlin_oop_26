@@ -83,7 +83,7 @@ class SingleLinkedList : CustomList {
             }
 
             return true
-        } catch (NoSuchElementException) {
+        } catch (e: NoSuchElementException) {
             return false
         }
     }
