@@ -110,5 +110,5 @@ class SingleLinkedList : CustomList {
         items.fold(SingleLinkedList()) { list, item ->
             list.also{ it.add(item) }
         }
-  }
+    }
 }
