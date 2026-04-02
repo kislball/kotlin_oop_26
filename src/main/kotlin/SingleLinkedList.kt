@@ -94,7 +94,7 @@ class SingleLinkedList : CustomList {
       var cur = begin
 
       override fun hasNext(): Boolean {
-        return cur?.next != null
+        return cur != null
       }
 
       override fun next(): Int {
