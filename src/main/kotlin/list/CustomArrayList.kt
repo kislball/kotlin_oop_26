@@ -1,15 +1,15 @@
 package org.example.list
 
-class CustomArrayList(size: Int) {
-    val inner = IntArray(size)
+class CustomArrayList(startSize: Int): CustomList {
+    var inner = IntArray(startSize)
 
     // TODO: implement interface CustomList
 
-    fun add(value: Int) {
+    override fun add(element: Int) {
         TODO("implement this")
     }
 
-    private fun resize(newSize: Int): CustomArrayList {
+    private fun resize(newSize: Int) {
         TODO("implement this")
         // should return new array list with newSize size
         // and first size elements copied from this
