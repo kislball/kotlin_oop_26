@@ -17,6 +17,7 @@ class SingleLinkedStack : SingleLinkedList(), Stack {
   }
 
   override fun peek(): Int {
+    if (super.size == 0) throw NoSuchElementException()
     return super.get(0)
   }
 
