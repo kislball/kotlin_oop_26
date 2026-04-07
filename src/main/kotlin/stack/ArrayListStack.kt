@@ -2,11 +2,7 @@ package org.example.stack
 
 import org.example.list.CustomArrayList
 
-class ArrayListStack(var inner: CustomArrayList) : Stack {
-  fun ArrayListStack() {
-    inner = CustomArrayList(16)
-  }
-
+class ArrayListStack(var inner: CustomArrayList = CustomArrayList(10)) : Stack {
   override fun push(value: Int) {
     addFirst(value)
   }
@@ -19,7 +15,11 @@ class ArrayListStack(var inner: CustomArrayList) : Stack {
   }
 
   override fun peek(): Int {
-    return get(0)
+    try {
+      return get(0)
+    } catch (e: IndexOutOfBoundsException) {
+      throw NoSuchElementException()
+    }
   }
 
   override val isEmpty: Boolean
