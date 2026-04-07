@@ -2,7 +2,11 @@ package org.example.stack
 
 import org.example.list.CustomArrayList
 
-class ArrayListStack(val inner: CustomArrayList) : Stack {
+class ArrayListStack(var inner: CustomArrayList) : Stack {
+  fun ArrayListStack() {
+    inner = CustomArrayList(16)
+  }
+
   override fun push(value: Int) {
     addFirst(value)
   }
