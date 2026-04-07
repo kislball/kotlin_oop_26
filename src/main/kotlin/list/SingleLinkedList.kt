@@ -2,7 +2,7 @@ package org.example.list
 
 import java.util.NoSuchElementException
 
-class SingleLinkedList : CustomList {
+open class SingleLinkedList : CustomList {
   class Node {
     var value: Int = 0
     var next: Node? = null
