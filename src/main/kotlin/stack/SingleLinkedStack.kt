@@ -1,6 +1,7 @@
 package org.example.stack
 
 import org.example.list.SingleLinkedList
+import java.util.NoSuchElementException
 
 class SingleLinkedStack : SingleLinkedList(), Stack {
   override fun push(value: Int) {
@@ -8,12 +9,8 @@ class SingleLinkedStack : SingleLinkedList(), Stack {
   }
 
   override fun pop(): Int {
-    if (super.size == 0) throw NoSuchElementException()
-    val v = super.get(0)
-
-    super.remove(0)
-
-    return v
+    if (begin == null) throw NoSuchElementException()
+    return removeAt(0)
   }
 
   override fun peek(): Int {

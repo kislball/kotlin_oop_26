@@ -73,20 +73,29 @@ open class SingleLinkedList : CustomList {
   override fun remove(element: Int): Boolean {
     try {
       val idx = indexOf(element)
-
-      if (idx == 0) {
-        begin = begin?.next
-      } else {
-        var node = getNode(idx) ?: throw IndexOutOfBoundsException()
-        var previous = getNode(idx - 1) ?: throw IndexOutOfBoundsException()
-
-        previous.next = node.next
-      }
-
+      removeAt(idx)
       return true
     } catch (e: NoSuchElementException) {
       return false
     }
+  }
+
+  override fun removeAt(index: Int): Int {
+    if (index < 0 || begin == null) throw IndexOutOfBoundsException()
+    
+    if (index == 0) {
+      val value = begin?.value ?: throw IndexOutOfBoundsException()
+      begin = begin?.next
+      return value
+    }
+    
+    val previous = getNode(index - 1) ?: throw IndexOutOfBoundsException()
+    val current = previous.next ?: throw IndexOutOfBoundsException()
+    val value = current.value
+    
+    previous.next = current.next
+    
+    return value
   }
 
   override fun iterator(): Iterator<Int> {

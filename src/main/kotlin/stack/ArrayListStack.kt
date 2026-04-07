@@ -1,5 +1,6 @@
 package org.example.stack
 
+import java.util.NoSuchElementException
 import org.example.list.CustomArrayList
 
 class ArrayListStack(var inner: CustomArrayList = CustomArrayList(10)) : Stack {
@@ -8,10 +9,8 @@ class ArrayListStack(var inner: CustomArrayList = CustomArrayList(10)) : Stack {
   }
 
   override fun pop(): Int {
-    val v = peek()
-    remove(0)
-
-    return v
+    if (size == 0) throw NoSuchElementException()
+    return inner.removeAt(0)
   }
 
   override fun peek(): Int {
@@ -40,6 +39,7 @@ class ArrayListStack(var inner: CustomArrayList = CustomArrayList(10)) : Stack {
   override val size: Int
     get() = inner.size
 
+  override fun removeAt(index: Int): Int = inner.removeAt(index)
+
   override fun iterator(): Iterator<Int> = inner.iterator()
 }
-

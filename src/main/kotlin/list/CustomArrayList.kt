@@ -60,12 +60,20 @@ open class CustomArrayList(initialCapacity: Int) : CustomList {
           return false
         }
 
-    for (i in idx until size - 1) {
+    removeAt(idx)
+    return true
+  }
+
+  override fun removeAt(index: Int): Int {
+    if (index < 0 || index >= size) throw IndexOutOfBoundsException()
+    val value = inner[index]
+
+    for (i in index until size - 1) {
       inner[i] = inner[i + 1]
     }
 
     size -= 1
-    return true
+    return value
   }
 
   override fun indexOf(element: Int): Int {
