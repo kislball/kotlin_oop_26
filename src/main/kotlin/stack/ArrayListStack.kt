@@ -2,8 +2,10 @@ package org.example.stack
 
 import java.util.NoSuchElementException
 import org.example.list.CustomArrayList
+import org.example.list.CustomList
 
-class ArrayListStack(var inner: CustomArrayList = CustomArrayList(10)) : Stack {
+class ArrayListStack(var inner: CustomArrayList = CustomArrayList(10)) :
+    Stack, CustomList by inner {
   override fun push(value: Int) {
     addFirst(value)
   }
@@ -23,23 +25,4 @@ class ArrayListStack(var inner: CustomArrayList = CustomArrayList(10)) : Stack {
 
   override val isEmpty: Boolean
     get() = size == 0
-
-  override fun get(index: Int): Int = inner.get(index)
-
-  override fun set(index: Int, value: Int) = inner.set(index, value)
-
-  override fun add(element: Int) = inner.add(element)
-
-  override fun addFirst(element: Int) = inner.addFirst(element)
-
-  override fun remove(element: Int): Boolean = inner.remove(element)
-
-  override fun indexOf(element: Int): Int = inner.indexOf(element)
-
-  override val size: Int
-    get() = inner.size
-
-  override fun removeAt(index: Int): Int = inner.removeAt(index)
-
-  override fun iterator(): Iterator<Int> = inner.iterator()
 }
