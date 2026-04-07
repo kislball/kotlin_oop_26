@@ -78,7 +78,7 @@ open class CustomArrayList(initialCapacity: Int) : CustomList {
   }
 
   override var size: Int = 0
-    private set
+    protected set
 
   val capacity: Int
     get() = inner.size
