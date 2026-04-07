@@ -2,7 +2,7 @@ package org.example.list
 
 import kotlin.IntArray
 
-class CustomArrayList(initialCapacity: Int) : CustomList {
+open class CustomArrayList(initialCapacity: Int) : CustomList {
   var inner = IntArray(initialCapacity)
 
   private fun resize(newSize: Int) {
@@ -87,4 +87,3 @@ class CustomArrayList(initialCapacity: Int) : CustomList {
     return inner.asSequence().take(size).iterator()
   }
 }
-
